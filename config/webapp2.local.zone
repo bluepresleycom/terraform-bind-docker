@@ -1,0 +1,11 @@
+$TTL 3600
+@       IN      SOA     ns1.webapp2.local. admin.webapp2.local. (
+                          2023053101      ; Serial
+                          3600            ; Refresh
+                          1800            ; Retry
+                          604800          ; Expire
+                          86400           ; Minimum TTL
+                    )
+
+@       IN      NS      ns1.webapp2.local.
+ns1     IN      A       <IP_OF_WEBAPP1_CONTAINER>
