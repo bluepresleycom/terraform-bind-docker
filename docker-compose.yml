@@ -1,0 +1,48 @@
+version: '3'
+services:
+  bind:
+    image: ubuntu/bind9:latest
+    container_name: bind-dns
+    environment:
+      - BIND9_USER=root
+      - TZ=America/New_York
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+    volumes:
+      - ./config:/etc/bind
+      - ./cache:/var/cache/bind
+      - ./records:/var/lib/bind
+      - ./tsigkey:/var/tsigkey
+    networks:
+      - dnsnetwork
+
+  nginx-proxy:
+    image: nginx:latest
+    container_name: nginx-proxy
+    volumes:
+      - ./nginx-config:/etc/nginx/conf.d
+    ports:
+      - 80:80
+    networks:
+      - dnsnetwork
+
+  webapp1:
+    image: nginx:latest
+    container_name: webapp1
+    volumes:
+      - ./webapp1:/usr/share/nginx/html
+    networks:
+      - dnsnetwork
+
+  webapp2:
+    image: nginx:latest
+    container_name: webapp2
+    volumes:
+      - ./webapp2:/usr/share/nginx/html
+    networks:
+      - dnsnetwork
+
+networks:
+  dnsnetwork:
+    driver: bridge

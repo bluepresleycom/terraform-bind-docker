@@ -1,0 +1,11 @@
+$TTL 86400
+@   IN SOA ns1.myapp.com. admin.myapp.com. (
+            2023053101 ; Serial
+            3600       ; Refresh
+            1800       ; Retry
+            604800     ; Expire
+            86400      ; Minimum TTL
+        )
+@   IN NS ns1.myapp.com.
+@   IN A 172.23.0.2
+ns1 IN A 172.23.0.2
