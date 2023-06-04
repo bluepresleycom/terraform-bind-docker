@@ -46,3 +46,6 @@ services:
 networks:
   dnsnetwork:
     driver: bridge
+
+# reference to common command for IP address discovery
+# docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}} <container>'
