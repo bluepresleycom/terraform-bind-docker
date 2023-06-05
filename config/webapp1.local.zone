@@ -8,4 +8,4 @@ $TTL 3600
                     )
 
 @       IN      NS      ns1.webapp1.local.
-ns1     IN      A       <IP_OF_WEBAPP1_CONTAINER>
+ns1     IN      A       172.23.0.10
