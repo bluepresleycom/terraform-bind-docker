@@ -15,7 +15,7 @@ services:
       - ./records:/var/lib/bind
       - ./tsigkey:/var/tsigkey
     networks:
-      - dnsnetwork
+      - appnetwork
 
   nginx-proxy:
     image: nginx:latest
@@ -25,15 +25,13 @@ services:
     ports:
       - 80:80
     networks:
-      - dnsnetwork
+      - appnetwork
 
   webapp1:
     image: nginx:latest
     container_name: webapp1
     volumes:
       - ./webapp1:/usr/share/nginx/html
-    networks:
-      - dnsnetwork
     networks:
       appnetwork:
         ipv4_address: 172.23.0.10
@@ -45,11 +43,15 @@ services:
     volumes:
       - ./webapp2:/usr/share/nginx/html
     networks:
-      - dnsnetwork
+      appnetwork:
+        ipv4_address: 172.23.0.11
 
 networks:
-  dnsnetwork:
+  appnetwork:
     driver: bridge
+    ipam:
+      config:
+        - subnet: 172.23.0.0/24
 
 # reference to common command for IP address discovery
 # docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' <container>
