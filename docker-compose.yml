@@ -59,4 +59,4 @@ networks:
 # very last step is to add the resolver on the MacOS host under /etc/resolver, one file per FQDN
 # sudo echo 'webapp1.local 127.0.0.1' > /etc/resolver/webapp1.local
 # etc.. 
-# restart local mac dns resolver with 'sudo killall -HUP mDNSResponder'
+# restart local mac dns resolver with 'sudo killall -HUP mDNSResponder; sudo dscacheutil -flushcache;'
