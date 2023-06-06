@@ -7,13 +7,13 @@ services:
       - BIND9_USER=root
       - TZ=America/New_York
     ports:
-      - "53:53/tcp"
-      - "53:53/udp"
+      - "1053:53/tcp"
+      - "1053:53/udp"
     volumes:
-      - ./config:/etc/bind
-      - ./cache:/var/cache/bind
-      - ./records:/var/lib/bind
-      - ./tsigkey:/var/tsigkey
+      - ./bind-config:/etc/bind
+      - ./bind-cache:/var/cache/bind
+      - ./bind-records:/var/lib/bind
+      - ./bind-tsigkey:/var/tsigkey
     networks:
       - appnetwork
 
@@ -21,7 +21,7 @@ services:
     image: nginx:latest
     container_name: nginx-proxy
     volumes:
-      - ./nginx-config:/etc/nginx/conf.d
+      - ./nginx-proxy-config:/etc/nginx/conf.d
     ports:
       - 80:80
     networks:
@@ -55,3 +55,8 @@ networks:
 
 # reference to common command for IP address discovery
 # docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' <container>
+
+# very last step is to add the resolver on the MacOS host under /etc/resolver, one file per FQDN
+# sudo echo 'webapp1.local 127.0.0.1' > /etc/resolver/webapp1.local
+# etc.. 
+# restart local mac dns resolver with 'sudo killall -HUP mDNSResponder'

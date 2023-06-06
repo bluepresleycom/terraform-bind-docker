@@ -1,5 +1,5 @@
 $TTL 3600
-@       IN      SOA     ns1.webapp1.local. admin.webapp1.local. (
+@       IN      SOA     ns1.webapp1.io. admin.webapp1.io. (
                           2023053101      ; Serial
                           3600            ; Refresh
                           1800            ; Retry
@@ -7,5 +7,7 @@ $TTL 3600
                           86400           ; Minimum TTL
                     )
 
-@       IN      NS      ns1.webapp1.local.
+@       IN      NS      ns1.webapp1.io.
 ns1     IN      A       172.23.0.10
+@       IN      A       172.23.0.10
+www     IN      A       172.23.0.10
